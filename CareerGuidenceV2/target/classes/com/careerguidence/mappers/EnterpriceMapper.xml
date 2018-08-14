@@ -1,0 +1,76 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.careerguidence.mappers.EnterpriceMapper">
+
+    <resultMap id="ent" type="com.careerguidence.dao.type.Enterprice">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="geolocation" property="geolocation"/>
+        <result column="phone" property="phone"/>
+        <result column="email" property="email"/>
+        <result column="login" property="login"/>
+        <result column="password" property="password"/>
+    </resultMap>
+
+    <resultMap id="entWithRole" type="com.careerguidence.dao.type.EnterpriceWithRole">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="geolocation" property="geolocation"/>
+        <result column="phone" property="phone"/>
+        <result column="email" property="email"/>
+        <result column="login" property="login"/>
+        <result column="password" property="password"/>
+        <result column="name_role" property="name_role"/>
+    </resultMap>
+
+    <select id="getEnterpriceWithRoleById" parameterType="java.lang.Long" resultMap="entWithRole">
+        select
+            enterprices.id ,
+            enterprices.name ,
+            enterprices.geolocation ,
+            enterprices.phone ,
+            enterprices.email ,
+            enterprices.login ,
+            enterprices.password ,
+            roles.name as name_role
+        from (enterprices , roles , enterprices_has_roles)
+        where enterprices_has_roles.id_enterprice = enterprices.id
+        and enterprices.id = #{id}
+        and enterprices_has_roles.id_role = roles.id;
+    </select>
+
+    <select id="getEnterpriceById" parameterType="java.lang.Long" resultMap="ent">
+        select * from enterprices WHERE id=#{id}
+    </select>
+
+    <select id="getEnterpriceByName" resultMap="ent">
+        select * from enterprices WHERE name = #{name}
+    </select>
+
+    <insert id="insertEnterprice">
+        insert into enterprices(id, name, geolocation, phone, email, login, password) values
+              ( #{id}, #{name}, #{geolocation}, #{phone}, #{email}, #{login}, #{password})
+    </insert>
+
+    <update id="updateEnterprice">
+        update enterprices set
+          name = #{name},
+          geolocation = #{geolocation},
+          phone = #{phone},
+          email = #{email},
+          login = #{login},
+          password = #{password}
+        where id = #{id}
+    </update>
+
+    <delete id="deleteEnterpriceById" parameterType="java.lang.Long">
+        delete from enterprices where id = #{id}
+    </delete>
+
+    <select id="getAll" resultMap="ent">
+        select * from enterprices
+    </select>
+
+</mapper>

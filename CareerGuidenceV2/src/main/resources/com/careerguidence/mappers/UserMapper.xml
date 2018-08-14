@@ -1,0 +1,84 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.careerguidence.mappers.UserMapper">
+
+    <resultMap id="user" type="com.careerguidence.dao.type.User">
+        <id column="id" property="id" />
+        <result column="id_category" property="id_category"/>
+        <result column="name" property="name" />
+        <result column="surname" property="surname"/>
+        <result column="age" property="age"/>
+        <result column="email" property="email"/>
+        <result column="login" property="login"/>
+        <result column="the_number_of_the_test" property="the_number_of_the_test"/>
+        <result column="password" property="password"/>
+    </resultMap>
+
+    <resultMap id="userWithRole" type="com.careerguidence.dao.type.UserWithRole">
+        <id column="id" property="id" />
+        <result column="id_category" property="id_category"/>
+        <result column="name" property="name" />
+        <result column="surname" property="surname"/>
+        <result column="age" property="age"/>
+        <result column="email" property="email"/>
+        <result column="login" property="login"/>
+        <result column="the_number_of_the_test" property="the_number_of_the_test"/>
+        <result column="password" property="password"/>
+        <result column="name_role" property="name_role"/>
+    </resultMap>
+
+    <select id="getUserWithRoleById" parameterType="java.lang.Long" resultMap="userWithRole">
+        select
+            users.id ,
+            users.id_category ,
+            users.name ,
+            users.surname ,
+            users.age ,
+            users.email ,
+            users.login ,
+            users.the_number_of_the_test,
+            users.password ,
+            roles.name as name_role
+        from (users , roles , users_has_roles)
+        where users_has_roles.id_user = users.id
+        and users.id = #{id}
+        and users_has_roles.id_role = roles.id;
+    </select>
+
+    <select id="getUserById" parameterType="java.lang.Long" resultMap="user">
+        select * from users WHERE id=#{id}
+    </select>
+
+    <select id="getUserByName" resultMap="user">
+        select * from users WHERE name = #{name}
+    </select>
+
+    <insert id="inserUser">
+        insert into users(id, id_category, name, surname, age, email, login, the_number_of_the_test, password) values
+              ( #{id}, #{id_category}, #{name}, #{surname}, #{age}, #{email}, #{login}, #{the_number_of_the_test}, #{password})
+    </insert>
+
+    <update id="updateUser">
+        update users set
+          id_category = #{id_category},
+          name = #{name},
+          surname = #{surname},
+          age = #{age},
+          email = #{email},
+          login = #{login},
+          the_number_of_the_test = #{the_number_of_the_test},
+          password = #{password}
+        where id = #{id}
+    </update>
+
+    <delete id="deleteUserById" parameterType="java.lang.Long">
+        delete from users where id = #{id}
+    </delete>
+
+    <select id="getAll" resultMap="user">
+        select * from users
+    </select>
+
+</mapper>

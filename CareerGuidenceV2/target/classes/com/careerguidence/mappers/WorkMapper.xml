@@ -1,0 +1,102 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.careerguidence.mappers.WorkMapper">
+
+    <resultMap id="work" type="com.careerguidence.dao.type.Work">
+        <id column="id" property="id" />
+        <result column="id_category" property="id_category"/>
+        <result column="name" property="name" />
+    </resultMap>
+
+    <resultMap id="entWork" type="com.careerguidence.dao.type.EnterpriceWork">
+        <id column="id" property="id" />
+        <result column="id_category" property="id_category"/>
+        <result column="name_work" property="name_work" />
+        <result column="name_enterprice" property="name_enterprice"/>
+        <result column="geolocation" property="geolocation"/>
+        <result column="phone" property="phone"/>
+        <result column="email" property="email"/>
+        <result column="login" property="login"/>
+        <result column="password" property="password"/>
+    </resultMap>
+
+    <select id="getEnterpriceWorkByWorkName" resultMap="entWork">
+        select  works.id ,
+                works.id_category,
+                works.name as name_work,
+                enterprices.name as name_enterprice,
+                enterprices.geolocation,
+                enterprices.phone,
+                enterprices.email,
+                enterprices.login,
+                enterprices.password
+        from (enterprices , works , enterprices_has_works)
+        where enterprices_has_works.id_enterprice = enterprices.id
+        and enterprices_has_works.id_work = works.id
+        and works.name = #{name};
+    </select>
+
+    <select id="getEnterpriceWorkByEnterpriceName" resultMap="entWork">
+        select  works.id ,
+                works.id_category,
+                works.name as name_work,
+                enterprices.name as name_enterprice,
+                enterprices.geolocation,
+                enterprices.phone,
+                enterprices.email,
+                enterprices.login,
+                enterprices.password
+        from (enterprices , works , enterprices_has_works)
+        where enterprices_has_works.id_enterprice = enterprices.id
+        and enterprices.name = #{name}
+        and enterprices_has_works.id_work = works.id;
+
+    </select>
+
+    <select id="getEnterpriceWorkByEnterpriceId" parameterType="java.lang.Long" resultMap="entWork">
+        select  works.id ,
+                works.id_category,
+                works.name as name_work,
+                enterprices.name as name_enterprice,
+                enterprices.geolocation,
+                enterprices.phone,
+                enterprices.email,
+                enterprices.login,
+                enterprices.password
+        from (enterprices , works , enterprices_has_works)
+        where enterprices_has_works.id_enterprice = enterprices.id
+        and enterprices.id = 1
+        and enterprices_has_works.id_work = works.id;
+    </select>
+
+    <select id="getWorkById" parameterType="java.lang.Long" resultMap="work">
+        select * from works WHERE id=#{id}
+    </select>
+
+    <select id="getWorkByName" resultMap="work">
+        select * from works WHERE name = #{name}
+    </select>
+
+    <insert id="insertWork">
+        insert into works(id, id_category, name) values
+              ( #{id}, #{id_category}, #{name})
+    </insert>
+
+    <update id="updateWork">
+        update works set
+          name = #{name},
+          id_category = #{id_category}
+        where id = #{id}
+    </update>
+
+    <delete id="deleteWorkById" parameterType="java.lang.Long">
+        delete from works where id = #{id}
+    </delete>
+
+    <select id="getAll" resultMap="work">
+        select * from works
+    </select>
+
+</mapper>

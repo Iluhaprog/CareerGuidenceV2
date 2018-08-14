@@ -1,0 +1,45 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.careerguidence.mappers.AnswerMapper">
+
+    <resultMap id="answer" type="com.careerguidence.dao.type.Answer">
+        <id column="id" property="id" />
+        <result column="id_question" property="id_question" />
+        <result column="name" property="name" />
+        <result column="flag" property="flag" />
+        <result column="points" property="points" />
+    </resultMap>
+
+    <select id="getAnswerById" parameterType="java.lang.Long" resultMap="answer">
+        select * from answers WHERE id=#{id}
+    </select>
+
+    <select id="getAnswerByName" resultMap="answer">
+        select * from answers WHERE name = #{name}
+    </select>
+
+    <insert id="insertAnswer">
+        insert into answers(id, id_question, name, flag, points) values
+              ( #{id}, #{id_question}, #{name}, #{flag}, #{points})
+    </insert>
+
+    <update id="updateAnswer">
+        update answers set
+          id_question = #{id_question},
+          name = #{name},
+          flag = #{flag},
+          points = #{points}
+        where id = #{id}
+    </update>
+
+    <delete id="deleteAnswerById" parameterType="java.lang.Long">
+        delete from answers where id = #{id}
+    </delete>
+
+    <select id="getAll" resultMap="answer">
+        select * from answers
+    </select>
+
+</mapper>
