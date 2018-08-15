@@ -88,11 +88,20 @@ create table users_has_roles(
 
 create table users_has_answers(
 
-	id_user int(10) unique not null,
-    id_answer int(10) unique not null,
+	id_user int(10) not null,
+    id_answer int(10) not null,
 	foreign key(id_user) references users(id),
     foreign key(id_answer) references answers(id)
     
+);
+
+create table users_has_categories(
+
+	id_user int(10) not null,
+    id_category int(10) not null,
+	foreign key(id_user) references users(id),
+    foreign key(id_category) references categories(id)
+
 );
 
 create table enterprices_has_roles(

@@ -2,6 +2,8 @@ package com.careerguidence.controllers;
 
 
 import com.careerguidence.dao.type.Answer;
+import com.careerguidence.dao.type.IdUserAndIdAnswer;
+import com.careerguidence.dao.type.UserAnswer;
 import com.careerguidence.services.interfaces.AnswerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,6 +48,21 @@ public class AnswerController {
     @RequestMapping(value = "/get-all" , method = RequestMethod.GET)
     public List<Answer> getAll() {
         return answerService.getAll();
+    }
+
+    @RequestMapping(value = "/insert-user-answer" , method = RequestMethod.POST)
+    public void insertUserAnswer(IdUserAndIdAnswer idUserAndIdAnswer){
+        answerService.insertUserAnswer(idUserAndIdAnswer);
+    }
+
+    @RequestMapping(value = "/get-user-answer" , method = RequestMethod.GET)
+    public List<UserAnswer> getUserAnswerById(Long id){
+        return answerService.getUserAnswerById(id);
+    }
+
+    @RequestMapping(value = "/get-by-question-id" , method = RequestMethod.GET)
+    public List<Answer> getAnswerByQuestionId(Long id){
+        return answerService.getAnswerByQuestionId(id);
     }
 
 }

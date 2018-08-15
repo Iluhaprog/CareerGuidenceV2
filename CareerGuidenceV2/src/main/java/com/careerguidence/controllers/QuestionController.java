@@ -1,5 +1,6 @@
 package com.careerguidence.controllers;
 
+import com.careerguidence.dao.type.Answer;
 import com.careerguidence.dao.type.Question;
 import com.careerguidence.services.interfaces.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/question")
@@ -44,5 +46,10 @@ public class QuestionController{
     @RequestMapping(value = "/get-all" , method = RequestMethod.GET)
     public List<Question> getAll() {
         return questionService.getAll();
+    }
+
+    @RequestMapping(value = "/get-question-with-answers" , method = RequestMethod.GET)
+    public Map<String , List<Answer>> getQuestionWithAnswerByQuestionId(Long id){
+        return questionService.getQuestionWithAnswerByQuestionId(id);
     }
 }

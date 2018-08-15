@@ -1,20 +1,17 @@
 package com.careerguidence.dao.type;
 
-public class UserAnswer {
+public class UserProfessionCategory {
 
     private Long id;
-    private Long id_question;
-    private String name_answer;
-    private boolean flag;
-    private int points;
     private Long id_category;
-    private String name_user;
+    private String name;
     private String surname;
     private int age;
     private String email;
     private String login;
     private int the_number_of_the_test;
     private String password;
+    private String name_category;
 
     public Long getId() {
         return id;
@@ -22,38 +19,6 @@ public class UserAnswer {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getId_question() {
-        return id_question;
-    }
-
-    public void setId_question(Long id_question) {
-        this.id_question = id_question;
-    }
-
-    public String getName_answer() {
-        return name_answer;
-    }
-
-    public void setName_answer(String name_answer) {
-        this.name_answer = name_answer;
-    }
-
-    public boolean isFlag() {
-        return flag;
-    }
-
-    public void setFlag(boolean flag) {
-        this.flag = flag;
-    }
-
-    public int getPoints() {
-        return points;
-    }
-
-    public void setPoints(int points) {
-        this.points = points;
     }
 
     public Long getId_category() {
@@ -64,12 +29,12 @@ public class UserAnswer {
         this.id_category = id_category;
     }
 
-    public String getName_user() {
-        return name_user;
+    public String getName() {
+        return name;
     }
 
-    public void setName_user(String name_user) {
-        this.name_user = name_user;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getSurname() {
@@ -118,5 +83,13 @@ public class UserAnswer {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getName_category() {
+        return name_category;
+    }
+
+    public void setName_category(String name_category) {
+        this.name_category = name_category;
     }
 }

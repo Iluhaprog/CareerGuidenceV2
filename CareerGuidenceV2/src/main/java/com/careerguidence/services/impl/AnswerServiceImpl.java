@@ -1,6 +1,8 @@
 package com.careerguidence.services.impl;
 
 import com.careerguidence.dao.type.Answer;
+import com.careerguidence.dao.type.IdUserAndIdAnswer;
+import com.careerguidence.dao.type.UserAnswer;
 import com.careerguidence.mappers.AnswerMapper;
 import com.careerguidence.services.interfaces.AnswerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,15 @@ public class AnswerServiceImpl implements AnswerService {
             throw exeption;
         }
 
+    }
+
+    @Override
+    public List<Answer> getAnswerByQuestionId(Long id) {
+        try {
+            return answerMapper.getAnswerByQuestionId(id);
+        }catch (Exception exception){
+            throw exception;
+        }
     }
 
     @Override
@@ -66,6 +77,24 @@ public class AnswerServiceImpl implements AnswerService {
             return answerMapper.getAll();
         }catch(Exception exeption){
             throw exeption;
+        }
+    }
+
+    @Override
+    public void insertUserAnswer(IdUserAndIdAnswer idUserAndIdAnswer){
+        try{
+            answerMapper.insertUserAnswer(idUserAndIdAnswer);
+        }catch(Exception exception){
+            throw exception;
+        }
+    }
+
+    @Override
+    public List<UserAnswer> getUserAnswerById(Long id) {
+        try{
+            return answerMapper.getUserAnswerById(id);
+        }catch(Exception exception){
+            throw exception;
         }
     }
 }

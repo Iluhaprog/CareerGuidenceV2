@@ -149,18 +149,10 @@ insert into enterprices_has_works(id_enterprice , id_work) values
     (2 , 5),
     (2 , 6);
     
-select  works.id , 
-        works.id_category,
-        works.name as name_work,
-        enterprices.name as name_enterprice,
-        enterprices.geolocation,
-        enterprices.phone,
-        enterprices.email,
-        enterprices.login,
-        enterprices.password
-from (enterprices , works , enterprices_has_works)
-where enterprices_has_works.id_enterprice = enterprices.id
-and enterprices_has_works.id_work = works.id 
-and works.name = "Актер";
 
+    
+insert into users_has_answers(id_user , id_answer) values
+	(1,2),
+	(1,3);
+    
 

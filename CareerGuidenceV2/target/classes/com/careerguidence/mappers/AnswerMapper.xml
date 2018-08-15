@@ -12,6 +12,51 @@
         <result column="points" property="points" />
     </resultMap>
 
+    <resultMap id="userAnswer" type="com.careerguidence.dao.type.UserAnswer">
+        <id column="id" property="id" />
+        <result column="id_question" property="id_question" />
+        <result column="name_answer" property="name_answer" />
+        <result column="flag" property="flag" />
+        <result column="points" property="points" />
+        <result column="id_category" property="id_category"/>
+        <result column="name_user" property="name_user" />
+        <result column="surname" property="surname"/>
+        <result column="age" property="age"/>
+        <result column="email" property="email"/>
+        <result column="login" property="login"/>
+        <result column="the_number_of_the_test" property="the_number_of_the_test"/>
+        <result column="password" property="password"/>
+    </resultMap>
+
+    <select id="getAnswerByQuestionId" parameterType="java.lang.Long" resultMap="answer">
+        select * from answers where id_question = #{id}
+    </select>
+
+    <select id="getUserAnswerById" parameterType="java.lang.Long" resultMap="userAnswer">
+        select answers.id ,
+               answers.id_question ,
+               answers.name as name_answer,
+               answers.flag ,
+               answers.points,
+               users.id_category,
+               users.name as name_user,
+               users.surname ,
+               users.age ,
+               users.email ,
+               users.login ,
+               users.the_number_of_the_test ,
+               users.password
+        from (users , answers , users_has_answers )
+        where users_has_answers.id_user = users.id
+              and users.id = #{id}
+              and users_has_answers.id_answer = answers.id;
+    </select>
+
+    <insert id="insertUserAnswer" parameterType="com.careerguidence.dao.type.IdUserAndIdAnswer">
+        insert into users_has_answers(id_user , id_answer) values
+          (#{id_user} , #{id_answer})
+    </insert>
+
     <select id="getAnswerById" parameterType="java.lang.Long" resultMap="answer">
         select * from answers WHERE id=#{id}
     </select>
