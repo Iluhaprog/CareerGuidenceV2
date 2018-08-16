@@ -2,6 +2,7 @@ package com.careerguidence.controllers;
 
 
 import com.careerguidence.dao.type.Answer;
+import com.careerguidence.dao.type.Category;
 import com.careerguidence.dao.type.IdUserAndIdAnswer;
 import com.careerguidence.dao.type.UserAnswer;
 import com.careerguidence.services.interfaces.AnswerService;
@@ -63,6 +64,11 @@ public class AnswerController {
     @RequestMapping(value = "/get-by-question-id" , method = RequestMethod.GET)
     public List<Answer> getAnswerByQuestionId(Long id){
         return answerService.getAnswerByQuestionId(id);
+    }
+
+    @RequestMapping(value = "/get-result" , method = RequestMethod.GET)
+    public Category getResult(Long id){
+        return answerService.getResult(id);
     }
 
 }

@@ -46,7 +46,7 @@
                users.login ,
                users.the_number_of_the_test ,
                users.password
-        from (users , answers , users_has_answers )
+        from users , answers , users_has_answers
         where users_has_answers.id_user = users.id
               and users.id = #{id}
               and users_has_answers.id_answer = answers.id;

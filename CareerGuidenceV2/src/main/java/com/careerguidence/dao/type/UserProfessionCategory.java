@@ -3,7 +3,6 @@ package com.careerguidence.dao.type;
 public class UserProfessionCategory {
 
     private Long id;
-    private Long id_category;
     private String name;
     private String surname;
     private int age;
@@ -19,14 +18,6 @@ public class UserProfessionCategory {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getId_category() {
-        return id_category;
-    }
-
-    public void setId_category(Long id_category) {
-        this.id_category = id_category;
     }
 
     public String getName() {

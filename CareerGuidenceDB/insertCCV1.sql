@@ -152,7 +152,33 @@ insert into enterprices_has_works(id_enterprice , id_work) values
 
     
 insert into users_has_answers(id_user , id_answer) values
-	(1,2),
-	(1,3);
+	(1, 2),
+	(1, 4),
+    (1, 7),
+    (1,14),
+    (1,15),
+    (1,19),
+    (1,21),
+    (1,24),
+    (1,27),
+    (1,32),
+    (1,33),
+    (1,36),
+    (1,41),
+    (1,42),
+    (1,47),
+    (1,48),
+    (1,51),
+    (1,54),
+    (1,55),
+    (1,60),
+    (1,62),
+    (1,65),
+    (1,68),
+    (1,70);
     
-
+select answers.points
+from users , answers , users_has_answers
+where users_has_answers.id_user = users.id
+	  and users.id = 1
+	  and users_has_answers.id_answer = answers.id;

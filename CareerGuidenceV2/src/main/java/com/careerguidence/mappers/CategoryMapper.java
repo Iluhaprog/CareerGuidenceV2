@@ -1,6 +1,8 @@
 package com.careerguidence.mappers;
 
 import com.careerguidence.dao.type.Category;
+import com.careerguidence.dao.type.IdUserAndIdCategory;
+import com.careerguidence.dao.type.UserProfessionCategory;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -16,5 +18,8 @@ public interface CategoryMapper {
     public void updateCategory(Category category);
     public void deleteCategoryById(Long id);
     public List<Category> getAll();
+
+    public UserProfessionCategory getUserCategory(Long id);
+    public void updateUserCategory(IdUserAndIdCategory idUserAndIdCategory);
 
 }

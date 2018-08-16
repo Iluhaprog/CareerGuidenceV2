@@ -41,7 +41,7 @@
             users.the_number_of_the_test,
             users.password ,
             roles.name as name_role
-        from (users , roles , users_has_roles)
+        from users , roles , users_has_roles
         where users_has_roles.id_user = users.id
         and users.id = #{id}
         and users_has_roles.id_role = roles.id;

@@ -9,9 +9,38 @@
         <result column="name" property="name" />
     </resultMap>
 
+    <resultMap id="userCategory" type="com.careerguidence.dao.type.UserProfessionCategory">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="surname" property="surname"/>
+        <result column="age" property="age"/>
+        <result column="email" property="email"/>
+        <result column="login" property="login"/>
+        <result column="the_number_of_the_test" property="the_number_of_the_test"/>
+        <result column="password" property="password"/>
+        <result column="name_category" property="name_category"/>
+    </resultMap>
+
+    <select id="getUserCategory" parameterType="java.lang.Long" resultMap="userCategory">
+        select users.* ,
+               categories.name as name_category
+        from users , categories , users_has_categories
+        where users_has_categories.id_user = users.id
+          and users.id = #{id}
+          and users_has_categories.id_category = categories.id;
+    </select>
+
+
+
     <select id="getCategoryById" parameterType="java.lang.Long" resultMap="category">
         select * from categories WHERE id=#{id}
     </select>
+
+    <update id="updateUserCategory">
+        update users_has_categories set
+          id_category = #{id_category}
+        where id_user = #{id_user}
+    </update>
 
     <select id="getCategoryByName" resultMap="category">
         select * from categories WHERE name = #{name}

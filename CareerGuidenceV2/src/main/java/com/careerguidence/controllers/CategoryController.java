@@ -1,6 +1,8 @@
 package com.careerguidence.controllers;
 
 import com.careerguidence.dao.type.Category;
+import com.careerguidence.dao.type.IdUserAndIdCategory;
+import com.careerguidence.dao.type.UserProfessionCategory;
 import com.careerguidence.services.interfaces.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,6 +46,16 @@ public class CategoryController{
     @RequestMapping(value = "/get-all" , method = RequestMethod.GET)
     public List<Category> getAll() {
         return categoryService.getAll();
+    }
+
+    @RequestMapping(value = "/get-user-category" , method = RequestMethod.GET)
+    public UserProfessionCategory getUserCategory(Long id){
+        return categoryService.getUserCategory(id);
+    }
+
+    @RequestMapping(value = "/update-user-category" , method = RequestMethod.PUT)
+    public void updateUserCategory(IdUserAndIdCategory idUserAndIdCategory){
+        categoryService.updateUserCaegory(idUserAndIdCategory);
     }
 
 }

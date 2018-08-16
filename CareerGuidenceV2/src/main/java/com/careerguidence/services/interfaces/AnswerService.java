@@ -1,6 +1,7 @@
 package com.careerguidence.services.interfaces;
 
 import com.careerguidence.dao.type.Answer;
+import com.careerguidence.dao.type.Category;
 import com.careerguidence.dao.type.IdUserAndIdAnswer;
 import com.careerguidence.dao.type.UserAnswer;
 
@@ -18,5 +19,6 @@ public interface AnswerService {
 
     public void insertUserAnswer(IdUserAndIdAnswer idUserAndIdAnswer);
     public List<UserAnswer> getUserAnswerById(Long id);
+    public Category getResult(Long id);
 
 }

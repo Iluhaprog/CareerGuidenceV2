@@ -1,6 +1,8 @@
 package com.careerguidence.services.impl;
 
 import com.careerguidence.dao.type.Category;
+import com.careerguidence.dao.type.IdUserAndIdCategory;
+import com.careerguidence.dao.type.UserProfessionCategory;
 import com.careerguidence.mappers.CategoryMapper;
 import com.careerguidence.services.interfaces.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,6 +67,24 @@ public class CategoryServiceImpl implements CategoryService {
             return categoryMapper.getAll();
         }catch(Exception exeption){
             throw exeption;
+        }
+    }
+
+    @Override
+    public UserProfessionCategory getUserCategory(Long id) {
+        try{
+            return categoryMapper.getUserCategory(id);
+        }catch (Exception exception){
+            throw exception;
+        }
+    }
+
+    @Override
+    public void updateUserCaegory(IdUserAndIdCategory idUserAndIdCategory) {
+        try{
+            categoryMapper.updateUserCategory(idUserAndIdCategory);
+        }catch(Exception exception){
+            throw exception;
         }
     }
 }
